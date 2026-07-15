@@ -54,11 +54,6 @@ This runs the ensemble simulation with noise, applies the square-root EnKF
 update, and writes result files to `enkf_sqrt/outputs/`. It also generates
 plots via the shared `Plot_*` modules in `common/`.
 
-To compare against the reference/paper figures:
-
-```bash
-python -c "from enkf_sqrt.AB_PlotPaper_True_Predict_simulation_ensemb_HalfFull_1_upd import plot_paper_comparison; plot_paper_comparison(K_member=6)"
-```
 
 To run the ensemble simulation with noise, applies the rlm_mac update, and writes results files to enkf_rlm_mac/outputs:
 
