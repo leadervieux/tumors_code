@@ -1,0 +1,26 @@
+iteration number 0
+rlm-mac  iter	iterLambda	objNew	objStdNew	lambda	changeM
+
+rlm-mac  0	0		3227.301303	345.764180
+
+number of data is 250
+number of data for updating is 250
+number of singular value retained 95
+rlm-mac  0	1		2136.098074	104.904451	1.000000	26.914870
+
+number of data is 250
+number of data for updating is 250
+number of singular value retained 95
+rlm-mac  1	1		1674.129956	59.182901	0.500000	22.827112
+
+number of data is 250
+number of data for updating is 250
+number of singular value retained 93
+rlm-mac  2	1		1442.275316	56.806620	0.250000	25.220864
+
+number of data is 250
+number of data for updating is 250
+number of singular value retained 93
+rlm-mac  3	1		1339.020706	204.232301	0.125000	27.521047
+
+terminating iterations: iter>=kalmanOptions.maxIter

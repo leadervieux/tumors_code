@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Generated results from each EnKF method (large, reproducible from the code)
+enkf_sqrt/outputs/*
+!enkf_sqrt/outputs/.gitkeep
+enkf_new_method/outputs/*
+!enkf_new_method/outputs/.gitkeep
+
+debug/
