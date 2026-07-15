@@ -33,8 +33,8 @@ tumors_code/
 │   └── outputs/            # generated .mat results land here (git-ignored)
 │
 ├── enkf_new_method/        # EnKF variant 2: template for your new method
-│   ├── rlm_mac.py                           # ← replace with your new update rule
-│   ├── rlm_runEnsemble.py  # ▶ run this once newFilter.py is filled in
+│   ├── rlm_mac.py                           # ← the rlm-mac
+│   ├── rlm_runEnsemble.py  # ▶ run this
 │   └── outputs/            # generated .mat results land here (git-ignored)
 │
 └── README.md
@@ -45,7 +45,7 @@ tumors_code/
 From the repository root (or from anywhere — paths are resolved automatically, see below):
 
 ```bash
-pip install numpy scipy matplotlib scikit-image
+pip install -r requirements.txt
 
 python enkf_sqrt/runEnsembleOfSimulationsAddNoise.py
 ```
@@ -60,69 +60,8 @@ To compare against the reference/paper figures:
 python -c "from enkf_sqrt.AB_PlotPaper_True_Predict_simulation_ensemb_HalfFull_1_upd import plot_paper_comparison; plot_paper_comparison(K_member=6)"
 ```
 
-Once you've written your new filter in `enkf_new_method/newFilter.py`:
+To run the ensemble simulation with noise, applies the rlm_mac update, and writes results files to enkf_rlm_mac/outputs:
 
 ```bash
-python enkf_new_method/runEnsembleOfSimulations_NewMethod.py
+python enkf_rlm_mac/rlm_runEnsemble.py
 ```
-
-## Why this structure? (folders without breaking imports)
-
-The original code was a flat list of files: every script imported the others
-by bare filename (`from sqrtFilter import sqrt_filter`) and loaded data by
-bare filename (`loadmat('Ensemble_Initial_...mat')`). Both of these only work
-if every file lives in the same directory *and* you run the script from that
-exact directory — which is exactly what breaks the moment you organize things
-into folders.
-
-Two small fixes solve this permanently:
-
-1. **`common/paths.py`** computes `DATA_DIR` (and an `output_dir()` helper)
-   from its own file location using `os.path.abspath(__file__)`, not from the
-   current working directory. So `DATA_DIR` always points at `data/` no
-   matter where you launch Python from.
-
-2. Each **run script** (`runEnsembleOfSimulationsAddNoise.py`,
-   `runEnsembleOfSimulations_NewMethod.py`) starts with a small bootstrap
-   block that adds `common/` to `sys.path` before importing anything from it:
-
-   ```python
-   THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-   REPO_ROOT = os.path.dirname(THIS_DIR)
-   sys.path.insert(0, os.path.join(REPO_ROOT, "common"))
-   sys.path.insert(0, THIS_DIR)
-
-   from paths import DATA_DIR, output_dir
-   OUTPUT_DIR = output_dir(THIS_DIR)
-   ```
-
-   After that, `from fastGaussian import fast_gaussian`,
-   `from sqrtFilter import sqrt_filter`, etc. all resolve exactly as they did
-   in the original flat layout — you don't need to touch any other import in
-   the codebase.
-
-All `loadmat(...)` / `savemat(...)` calls that used to reference bare
-filenames now use `DATA_DIR` (for shared truth/initial-condition inputs) or
-`OUTPUT_DIR` (for each method's generated results), so two EnKF methods can
-run side by side without overwriting each other's output files.
-
-## Adding a third EnKF method later
-
-Copy `enkf_new_method/` as a template:
-
-```bash
-cp -r enkf_new_method enkf_<your_method_name>
-```
-
-Rename the filter file and update the one import line at the top of the run
-script to point at it. Everything else (simulator, plotting, data) is shared
-automatically through `common/` and `data/` — no other changes needed.
-
-## Notes
-
-- `new_initial_ensemble_Python_1.mat` (loaded by the main run script) is not
-  tracked in this repo. If you regenerate it elsewhere, drop it in `data/` so
-  it resolves through `DATA_DIR`.
-- The filenames read by `AB_PlotPaper_..._upd.py` for `enkf_res` /
-  `enkf_pred` should match whatever your run script actually saved in
-  `enkf_sqrt/outputs/` — rename either side if they drift apart.
