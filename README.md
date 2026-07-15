@@ -32,7 +32,7 @@ tumors_code/
 │   ├── runEnsembleOfSimulationsAddNoise.py    # ▶ MAIN SCRIPT — run this
 │   └── outputs/            # generated .mat results land here (git-ignored)
 │
-├── enkf_new_method/        # EnKF variant 2: template for your new method
+├── enkf_rlm_mac/        # EnKF variant 2: template for your new method
 │   ├── rlm_mac.py                           # ← the rlm-mac
 │   ├── rlm_runEnsemble.py  # ▶ run this
 │   └── outputs/            # generated .mat results land here (git-ignored)
