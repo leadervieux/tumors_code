@@ -60,3 +60,4 @@ To run the ensemble simulation with noise, applies the rlm_mac update, and write
 ```bash
 python enkf_rlm_mac/rlm_runEnsemble.py
 ```
+This project is licensed under the terms of the MIT license.
