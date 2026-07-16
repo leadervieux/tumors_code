@@ -17,7 +17,7 @@ and was prepared through an internship at NORCE in the first half of 2026.
 ```
 tumors_code/
 ├── common/                # Shared simulation core, physics, and plotting — used by every EnKF method
-│   ├── paths.py                        # central path definitions (see "Why this structure" below)
+│   ├── paths.py                        # central path definitions
 │   ├── A_three_phase_simulator_compartment_full_May08_growth_opt.py   # PDE/compartment simulator
 │   ├── solve_Pressure_sparse.py
 │   ├── lambda_chem.py
@@ -40,10 +40,10 @@ tumors_code/
 │   ├── runEnsembleOfSimulationsAddNoise.py    # ▶ MAIN SCRIPT — run this
 │   └── outputs/            # generated .mat results land here (git-ignored)
 │
-├── enkf_rlm_mac/        # EnKF variant 2: template for your new method
-│   ├── rlm_mac.py                           # ← the rlm-mac
+├── enkf_rlm_mac/        # EnKF variant 2: rlm_mac method
+│   ├── rlm_mac.py                           # the rlm-mac
 │   ├── rlm_runEnsemble.py  # ▶ run this
-│   └── outputs/            # generated .mat results land here (git-ignored)
+│   └── outputs/            # generated .mat results land here
 │
 └── README.md
 ```
