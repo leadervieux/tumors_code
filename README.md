@@ -4,6 +4,14 @@ This repository simulates tumor growth using a three-phase compartment model and
 performs data assimilation with an Ensemble Kalman Filter (EnKF) to estimate
 model parameters (e.g. `theta0`, `K0`) from noisy observations.
 
+The code is based on the paper:
+
+Geir Nævdal and Steinar Evje: "Can cancer cells inform us about the tumor microenvironment?",
+Journal of Computational Physics, Volume 492, 2023, 112449, ISSN 0021-9991,
+https://doi.org/10.1016/j.jcp.2023.112449
+
+and was prepared through an internship at NORCE in the first half of 2026.
+
 ## Project structure
 
 ```
